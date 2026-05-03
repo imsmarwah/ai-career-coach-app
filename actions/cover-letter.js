@@ -2,10 +2,7 @@
 
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+import { chatCompletion } from "@/lib/ai";
 
 export async function generateCoverLetter(data) {
   const { userId } = await auth();
@@ -44,8 +41,7 @@ export async function generateCoverLetter(data) {
   `;
 
   try {
-    const result = await model.generateContent(prompt);
-    const content = result.response.text().trim();
+    const content = (await chatCompletion([{ role: "user", content: prompt }])).trim();
 
     const coverLetter = await db.coverLetter.create({
       data: {
@@ -95,7 +91,7 @@ export async function getCoverLetter(id) {
 
   if (!user) throw new Error("User not found");
 
-  return await db.coverLetter.findUnique({
+  return await db.coverLetter.findFirst({
     where: {
       id,
       userId: user.id,
@@ -113,10 +109,18 @@ export async function deleteCoverLetter(id) {
 
   if (!user) throw new Error("User not found");
 
-  return await db.coverLetter.delete({
+  const coverLetter = await db.coverLetter.findFirst({
     where: {
       id,
       userId: user.id,
+    },
+  });
+
+  if (!coverLetter) throw new Error("Cover letter not found");
+
+  return await db.coverLetter.delete({
+    where: {
+      id: coverLetter.id,
     },
   });
 }

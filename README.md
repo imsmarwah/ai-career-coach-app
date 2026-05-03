@@ -1,20 +1,55 @@
-# Full Stack AI Career Coach with Next JS, Neon DB, Tailwind, Prisma, Inngest, Shadcn UI Tutorial 🔥🔥
-## https://youtu.be/UbXpRv5ApKA
+# CareerPilot AI – Full Stack AI Career Coach Platform
 
-![sensai](https://github.com/user-attachments/assets/eee79242-4056-4d19-b655-2873788979e1)
+CareerPilot AI is a modern full-stack AI-powered career coaching platform built with Next.js. It helps users improve resumes, generate cover letters, prepare for interviews, and accelerate career growth using intelligent automation.
 
-### Make sure to create a `.env` file with following variables -
+Developed and maintained by **Sawan Singh Marwah**.
 
+---
+
+## 🚀 Tech Stack
+
+* Next.js
+* Tailwind CSS
+* Prisma ORM
+* PostgreSQL (Neon DB)
+* Clerk Authentication
+* Inngest
+* Shadcn UI
+* Google Gemini API
+
+---
+
+## ✨ Core Features
+
+* AI Resume Builder
+* AI Cover Letter Generator
+* Career Guidance Dashboard
+* Interview Preparation Tools
+* Secure Authentication
+* Modern Responsive UI
+
+---
+
+## Run Locally
+
+Open your browser and visit:
+
+```text
+http://localhost:3000
 ```
-DATABASE_URL=
 
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
-CLERK_SECRET_KEY=
+---
 
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/onboarding
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/onboarding
+## Maintainer
 
-GEMINI_API_KEY=
-```
+**Sawan Marwah**
+MSc Computer Systems
+Riga Nordic University
+Riga, Latvia
+
+---
+
+##  Notes
+
+This project is maintained for educational, portfolio, and development purposes. Further enhancements and personalization are in progress.
+

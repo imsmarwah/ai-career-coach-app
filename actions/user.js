@@ -30,7 +30,7 @@ export async function updateUser(data) {
         if (!industryInsight) {
           const insights = await generateAIInsights(data.industry);
 
-          industryInsight = await db.industryInsight.create({
+          industryInsight = await tx.industryInsight.create({
             data: {
               industry: data.industry,
               ...insights,
@@ -60,7 +60,9 @@ export async function updateUser(data) {
     );
 
     revalidatePath("/");
-    return result.user;
+    revalidatePath("/onboarding");
+    revalidatePath("/dashboard");
+    return result.updatedUser;
   } catch (error) {
     console.error("Error updating user and industry:", error.message);
     throw new Error("Failed to update profile");
@@ -69,13 +71,10 @@ export async function updateUser(data) {
 
 export async function getUserOnboardingStatus() {
   const { userId } = await auth();
-  if (!userId) throw new Error("Unauthorized");
 
-  const user = await db.user.findUnique({
-    where: { clerkUserId: userId },
-  });
-
-  if (!user) throw new Error("User not found");
+  if (!userId) {
+    return { isOnboarded: false };
+  }
 
   try {
     const user = await db.user.findUnique({
@@ -92,6 +91,7 @@ export async function getUserOnboardingStatus() {
     };
   } catch (error) {
     console.error("Error checking onboarding status:", error);
-    throw new Error("Failed to check onboarding status");
+
+    return { isOnboarded: false };
   }
 }

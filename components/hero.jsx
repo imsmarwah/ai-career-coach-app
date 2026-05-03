@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 const HeroSection = () => {
   const imageRef = useRef(null);
@@ -40,22 +41,37 @@ const HeroSection = () => {
             AI-powered tools for job success.
           </p>
         </div>
-        <div className="flex justify-center space-x-4">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/dashboard">
             <Button size="lg" className="px-8">
               Get Started
             </Button>
           </Link>
-          <Link href="https://www.youtube.com/roadsidecoder">
-            <Button size="lg" variant="outline" className="px-8">
-              Watch Demo
+
+          <Link
+            href="https://www.linkedin.com/in/sawan-singh-marwah/"
+            target="_blank"
+          >
+            <Button size="lg" variant="outline" className="px-8 gap-2">
+              <FaLinkedin />
+              LinkedIn
+            </Button>
+          </Link>
+
+          <Link
+            href="https://github.com/imsmarwah"
+            target="_blank"
+          >
+            <Button size="lg" variant="outline" className="px-8 gap-2">
+              <FaGithub />
+              GitHub
             </Button>
           </Link>
         </div>
         <div className="hero-image-wrapper mt-5 md:mt-0">
           <div ref={imageRef} className="hero-image">
             <Image
-              src="/banner.jpeg"
+              src="/banner2.jpeg"
               width={1280}
               height={720}
               alt="Dashboard Preview"
