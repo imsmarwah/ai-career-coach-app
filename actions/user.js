@@ -26,9 +26,14 @@ export async function updateUser(data) {
           },
         });
 
-        // If industry doesn't exist, create it with default values
+        // If industry doesn't exist, create it with AI insights (or defaults if AI fails)
         if (!industryInsight) {
-          const insights = await generateAIInsights(data.industry);
+          let insights = {};
+          try {
+            insights = await generateAIInsights(data.industry);
+          } catch (e) {
+            console.error("AI insights failed, using defaults:", e.message);
+          }
 
           industryInsight = await tx.industryInsight.create({
             data: {
